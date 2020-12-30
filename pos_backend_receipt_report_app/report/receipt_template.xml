@@ -34,7 +34,7 @@
                                     <t t-set="total_discount" t-value="total_discount + line.discount_val" />
                                     <tr>
                                         <td colspan="2">
-                                            <span style="padding-left:2em;"><t t-esc="line.price_unit" /> - <t t-esc="total_discount" /></span>
+                                            <span style="padding-left:2em;"><t t-esc="line.price_unit" /></span>
                                         </td>
                                     </tr>
                                     <tr>
