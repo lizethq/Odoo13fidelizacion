@@ -141,6 +141,28 @@
                                     <t t-esc="o.config_id.loyalty_id.name" />
                                 </div>
                                 <br />
+                                <t t-esc="o.partner_id.name" />
+                                <br />
+                                <table style="width:100%;">
+                                    <tr style="font-size:100%;">
+                                        <td style="width:70%;">
+                                            <span>Puntos Ganados</span>
+                                        </td>
+                                        <td style="width:30%;text-align:right;">
+                                            <span><t t-esc="o.loyalty_points" /></span>
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size:100%;">
+                                        <td style="width:70%;">
+                                            <span>Puntos Totales</span>
+                                        </td>
+                                        <td style="width:30%;text-align:right;">
+                                            <span><t t-esc="o.partner_id.loyalty_points" /></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br />
+                                <br />
                             </t>
 
                             <div t-if="o.partner_id">
@@ -160,28 +182,7 @@
                                 <br /><br />
                             </div>
 
-                            <table style="width:100%;">
-                                <tr style="font-size:100%;">
-                                    <td style="width:70%;">
-                                        <span>Puntos Ganados</span>
-                                    </td>
-                                    <td style="width:30%;text-align:right;">
-                                        <span><t t-esc="o.loyalty_points" /></span>
-                                    </td>
-                                </tr>
-                                <tr style="font-size:100%;">
-                                    <td style="width:70%;">
-                                        <span>Puntos Totales</span>
-                                    </td>
-                                    <td style="width:30%;text-align:right;">
-                                        <span><t t-esc="o.partner_id.loyalty_points" /></span>
-                                    </td>
-                                </tr>
-                            </table>
-                            <br />
-                            <br />
-
-
+                            
                             <div>
                                 <t t-esc="o.pos_reference" />
                             </div>
