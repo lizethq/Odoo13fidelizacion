@@ -56,4 +56,4 @@ class PosOrderLine(models.Model):
     @api.depends('qty','price_unit', 'price_subtotal_incl')
     def _compute_discount_val(self):
         for rec in self:
-            rec.discount_val = round(rec.qty * rec.price_unit - rec.price_subtotal_incl, 2)
+            rec.discount_val = round(rec.price_subtotal_incl - rec.qty * rec.price_unit, 2)
