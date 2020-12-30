@@ -157,9 +157,9 @@
                         <br /><br /><br />
                         <div style="text-align:center;font-size:75%">
 
-                            <!-- <t t-if="o.config_id.loyalty_id.name and o.loyalty_points != 0">
+                            <t t-if="o.config_id.loyalty_id.name and o.loyalty_points != 0">
                                 <div style="font-weight: bold;font-size: 125%;text-align: center;">
-                                    <div  style="font-weight: normal;font-size: 100%;">32x(-)</div>
+                                    <div  style="font-weight: normal;font-size: 100%;">--------------------------------</div>
                                     <br />
                                     <t t-esc="o.config_id.loyalty_id.name" />
                                 </div>
@@ -188,7 +188,7 @@
                                 </table>
                                 <br />
                                 <br />
-                            </t> -->
+                            </t>
 
                             <div t-if="o.partner_id">
                                 Cliente: <t t-esc="o.partner_id.name" /><br/>
