@@ -45,11 +45,11 @@
                                     <tr>
                                         <td style="width:60%;">
                                             <span style="padding-left:2em;">
-                                                <t t-esc="line.qty" t-options="{'widget': 'float', 'precision': currency_precision}" /> <t t-esc="line.product_id.uom_id.name" /> x <t t-esc="line.price_unit - line.discount_val" t-options="{'widget': 'float', 'precision': currency_precision}" />
+                                                <t t-esc="line.qty" t-options="{'widget': 'float', 'precision': currency_precision}" /> <t t-esc="line.product_id.uom_id.name" /> x <t t-esc="line.price_unit - line.discount_val / line.qty" t-options="{'widget': 'float', 'precision': currency_precision}" />
                                             </span>
                                         </td>
                                         <td style="text-align:right;width:50%;">
-                                            <t t-esc="line.price_subtotal_incl" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+                                            <t t-esc="line.price_subtotal" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
                                         </td>
                                     </tr>
                                 </t>
@@ -61,13 +61,36 @@
                                             </span>
                                         </td>
                                         <td style="text-align:right;width:50%;">
-                                            <t t-esc="line.price_subtotal_incl" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+                                            <t t-esc="line.price_subtotal" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
                                         </td>
                                     </tr>
                                 </t>
                             </t>
                         </table>
                         <br />
+                        <table t-if="o.amount_tax != 0" style="width:100%;">
+                            <tr>
+                                <td colspan="2" style="text-align:right;">
+                                    --------
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:50%;">
+                                    <span>Subtotal</span>
+                                </td>
+                                <td style="width:50%;text-align:right;">
+                                    <span><t t-esc="o.subtotal" t-options='{"widget": "monetary", "display_currency": o.currency_id}' /></span>
+                                </td>
+                            </tr>
+                            <tr t-foreach="o.lines.mapped('tax_ids_after_fiscal_position')" t-as="tax">
+                                <td style="width:50%;">
+                                    <span><t t-esc="tax.name" /></span>
+                                </td>
+                                <td style="width:50%;text-align:right;">
+                                    <t t-esc="tax.amount / 100 * sum(o.lines.filtered(lambda x: tax.id in x.tax_ids_after_fiscal_position.ids).mapped('price_subtotal'))" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+                                </td>
+                            </tr>
+                        </table>
                         <table style="width:100%;">
                             <tr>
                                 <td colspan="2" style="text-align:right;">
@@ -134,9 +157,9 @@
                         <br /><br /><br />
                         <div style="text-align:center;font-size:75%">
 
-                            <t t-if="o.config_id.loyalty_id.name and o.loyalty_points != 0">
+                            <!-- <t t-if="o.config_id.loyalty_id.name and o.loyalty_points != 0">
                                 <div style="font-weight: bold;font-size: 125%;text-align: center;">
-                                    <div  style="font-weight: normal;font-size: 100%;">--------------------------------</div>
+                                    <div  style="font-weight: normal;font-size: 100%;">32x(-)</div>
                                     <br />
                                     <t t-esc="o.config_id.loyalty_id.name" />
                                 </div>
@@ -165,7 +188,7 @@
                                 </table>
                                 <br />
                                 <br />
-                            </t>
+                            </t> -->
 
                             <div t-if="o.partner_id">
                                 Cliente: <t t-esc="o.partner_id.name" /><br/>
@@ -183,7 +206,6 @@
                                 </t>
                                 <br /><br />
                             </div>
-
                             
                             <div>
                                 <t t-esc="o.pos_reference" />
