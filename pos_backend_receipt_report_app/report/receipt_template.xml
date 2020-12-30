@@ -34,7 +34,7 @@
                                     <t t-set="total_discount" t-value="total_discount + line.discount_val" />
                                     <tr>
                                         <td colspan="2">
-                                            <span style="padding-left:2em;"><t t-esc="line.price_unit" /></span>
+                                            <span style="padding-left:2em;"><t t-esc="line.price_unit" /> - <t t-esc="total_discount" /></span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -141,7 +141,9 @@
                                     <t t-esc="o.config_id.loyalty_id.name" />
                                 </div>
                                 <br />
-                                <t t-esc="o.partner_id.name" />
+                                <div style="font-size:100%;">
+                                    <t t-esc="o.partner_id.name" />
+                                </div>
                                 <br />
                                 <table style="width:100%;">
                                     <tr style="font-size:100%;">
